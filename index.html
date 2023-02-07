@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a6e249536f.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.min.js"></script>
+
+    <title>Control de Stock</title>
+</head>
+
+<body>
+
+    <div class="card">
+        <div class="bg">
+            <div class="title" id="title">Control Stock</div>
+            <div class="content-form">
+                <div class="index" id="index">
+
+                    <h2>Bienvenido</h2>
+                    <div class="up btn-new" onclick="newBtn()" title="Empezá un control de stock desde cero">
+                        Nuevo
+                    </div>
+                    <div class="up" id="btnContinue" onclick="continueBtn()" title="Continuá con el control de stock que ya habías empezado.">
+                        Continuar
+                    </div>
+
+                </div>
+                <div class="form" id="form">
+
+                    <div class="h2title">
+                        <h2><span>Exportá,</span> <br> <span>cargá,</span> <br> <span>escaneá</span> <br> <span>y
+                                listo.</span></h2>
+                    </div>
+
+                    <label for="file-upload" class="up">
+                        <i class="fas fa-cloud-upload-alt"></i> Subir archivo
+                    </label>
+                    <input id="file-upload" onchange='cambiar()' type="file" style='display: none;' />
+                    <div class="info" id="info">Cargá acá tu hoja de calculo</div>
+                    <input type="submit" onclick="upload()" value="Enviar">
+                    <p class="back" id="back" onclick="backPage()">volver</p>
+                </div>
+                <div class="start-control" id="start-control">
+                    <select name="almacen" id="almacen">
+                        <option value="select">Almacén</option>
+                        <option value="EC">EC</option>
+                        <option value="STOCK">Stock</option>
+                    </select>
+                    <select name="ubication" id="ubication">
+                        <option value="select">Ubicación</option>
+                        <option value="EXH">Exhibición</option>
+                        <option value="DI">Depósito</option>
+                    </select>
+                    <input type="text" id="search" placeholder="Ingresá acá los códigos">
+                    <div id="preview" class=" up" onclick="viewTable()">ver stock</div>
+                    <div class="tableInp">
+                        <table id="">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Código</th>
+                                    <th>Cant Lóg</th>
+                                    <th>Cant</th>
+                                    <th>Dif</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableInp">
+
+                            </tbody>
+                        </table>
+                        <!-- tabla a exportar -->
+                        <table style="display: none" id="1">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Cant</th>
+                                    <th>Almacen</th>
+                                    <th>Ubicacion</th>
+                                    <th>Hora</th>
+                                </tr>
+                                </tbody>
+                            <tbody id="2">
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+                    <a id="dlink" style="display:none;"></a>
+                    <input class="up" type="button" onclick="tablesToExcel(['1'], ['Hoja1'], 'myfile.xls')"
+                        value="Descargar">
+                    <div id="previewTable" class="table-stock">
+                        <div class="btn-exit" onclick="closePreview()">
+                            <div class="exit"></div>
+                        </div>
+                        <div class="overflow-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Código</th>
+                                        <th>Descripción</th>
+                                        <th>EC</th>
+                                        <th>Stock</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-stock">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <p class="back" id="back" onclick="backPage()">volver</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-alert" id="alert">
+            <div class="alert">
+                <h2 id="h2">Soy una alerta</h2>
+                <p id="p">Hola, soy una alerta</p>
+                <button class="btn" id="btn-alert" onclick="closeAlert()">Cerrar</button>
+            </div>
+
+        </div>
+        <div class="history-bg" id="historyBg" onclick="closeHistory()">
+            <div class="history">
+                <h2>Historial de <span id="h2History"></span></h2>
+                <div class="tableHistory">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Código</th>
+                                <th>Cant</th>
+                                <th>Almacén</th>
+                                <th>Ubicación</th>
+                                <th>Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableHistory">
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <script src="/js/code.js"></script>
+</body>
+
+</html>
